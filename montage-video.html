@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevation Académie - Espace Cours (Mode Test Final)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            height: 70px;
+            width: 100%;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .logo { font-size: 22px; font-weight: bold; color: #1b4d3e; }
+        header a { color: #555; text-decoration: none; font-size: 14px; font-weight: 500; }
+
+        .main-container { display: flex; flex: 1; overflow: hidden; }
+
+        .video-section { flex: 1; display: flex; flex-direction: column; background: #fafafa; overflow-y: auto; padding: 30px; }
+        .video-wrapper { width: 100%; max-width: 850px; margin: 0 auto; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; }
+        
+        video { width: 100%; height: 100%; object-fit: cover; }
+        
+        .quiz-container { display: none; width: 100%; height: 100%; background: #ffffff; padding: 30px; overflow-y: auto; color: #333; }
+        .quiz-container h2 { color: #1b4d3e; margin-bottom: 15px; font-size: 22px; }
+        .quiz-question { margin-bottom: 20px; background: #f8fafc; padding: 15px; border-radius: 6px; }
+        .quiz-question p { font-weight: 600; margin-bottom: 10px; }
+        .quiz-options label { display: block; margin: 8px 0; cursor: pointer; font-size: 14px; }
+        .btn-submit-quiz { background: #1b4d3e; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+
+        .video-description { width: 100%; max-width: 850px; margin: 20px auto 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .video-description h1 { font-size: 22px; color: #1b4d3e; margin-bottom: 10px; }
+        .video-description p { color: #666; font-size: 15px; line-height: 1.6; }
+
+        .sidebar { width: 360px; background-color: #ffffff; display: flex; flex-direction: column; border-left: 1px solid #e2e8f0; }
+        .sidebar-header { padding: 20px 25px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .sidebar-header h2 { font-size: 18px; color: #1b4d3e; }
+        
+        .btn-reset { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; }
+
+        .progression-box { padding: 15px 25px; border-bottom: 1px solid #e2e8f0; background: #fff; }
+        .barre-fond { background: #e2e8f0; border-radius: 10px; height: 10px; width: 100%; margin-top: 8px; overflow: hidden; }
+        .barre-remplie { background: #ff9f43; height: 0%; width: 0%; transition: width 0.4s ease; }
+        
+        .liste-lecons { list-style: none; overflow-y: auto; flex: 1; }
+        .lecon-item { padding: 15px 25px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between; }
+        .lecon-item.disponible { cursor: pointer; }
+        .lecon-item.disponible:hover { background-color: #f8fafc; }
+        .lecon-item.active { background-color: #edf7f4; border-left: 4px solid #1b4d3e; }
+        .lecon-text { font-size: 14px; color: #475569; font-weight: 500; }
+        .lecon-item.active .lecon-text { color: #1b4d3e; font-weight: 600; }
+        .lecon-item.bloque { background-color: #f8fafc; opacity: 0.5; }
+        .statut-icon { font-size: 14px; }
+
+        .btn-sidebar-examen { background: #ff9f43; color: white; padding: 12px; margin: 10px 25px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-align: center; font-size: 14px; transition: 0.2s; display: block; width: calc(100% - 50px); }
+        .btn-sidebar-examen:disabled { background: #ccc; cursor: not-allowed; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Elevation Académie</div>
+        <nav><a href="index.html">⬅ Retour à l'accueil</a></nav>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="video-section">
+            <div class="video-wrapper">
+                <video id="main-player" controls src="https://vjs.zencdn.net/v/oceans.mp4" onended="videoFini()"></video>
+                
+                <div id="quiz-box" class="quiz-container">
+                    <h2 id="quiz-title">Examen Mi-parcours</h2>
+                    <div id="quiz-content"></div>
+                    <button class="btn-submit-quiz" onclick="verifierQuiz()">Soumettre mes réponses</button>
+                </div>
+            </div>
+            
+            <div class="video-description">
+                <h1 id="video-title">Module 1 : Introduction au Montage Vidéo</h1>
+                <p id="video-text">Bienvenue dans votre espace d'apprentissage. Regardez la vidéo jusqu'à la fin.</p>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div>
+                    <h2>Montage Vidéo</h2>
+                    <p style="font-size:12px; color:#666;">Sauvegarde Auto Active</p>
+                </div>
+                <button class="btn-reset" onclick="reinitialiserTout()">Effacer Test</button>
+            </div>
+
+            <div class="progression-box">
+                <span style="font-size: 13px; color: #475569;">Progression : <strong id="prog-text" style="color:#ff9f43;">0%</strong></span>
+                <div class="barre-fond"><div class="barre-remplie" id="prog-bar"></div></div>
+            </div>
+
+            <ul class="liste-lecons">
+                <li id="lecon-1" class="lecon-item disponible active" onclick="cliquerLecon(1, 'https://vjs.zencdn.net/v/oceans.mp4', 'Module 1 : Introduction au Montage Vidéo', 'Découvrez les bases indispensables du montage vidéo.')">
+                    <span class="lecon-text">1. Introduction au Montage</span>
+                    <span class="statut-icon" id="icon-1">▶️</span>
+                </li>
+                
+                <!-- Chanjman sous videyo pou evite bug bloka j -->
+                <li id="lecon-2" class="lecon-item bloque" onclick="cliquerLecon(2, 'https://www.w3schools.com/html/mov_bbb.mp4', 'Module 2 : Les outils de coupure', 'Apprenez à couper vos rushs proprement.')">
+                    <span class="lecon-text">2. Les outils de coupure</span>
+                    <span class="statut-icon" id="icon-2">🔒</span>
+                </li>
+                
+                <li id="lecon-3" class="lecon-item bloque" onclick="cliquerLecon(3, 'https://www.w3schools.com/html/movie.mp4', 'Module 3 : Maîtriser les transitions', 'Donnez du rythme à vos vidéos.')">
+                    <span class="lecon-text">3. Les transitions</span>
+                    <span class="statut-icon" id="icon-3">🔒</span>
+                </li>
+
+                <button id="exam-mi" class="btn-sidebar-examen" disabled onclick="lancerExamen('Mi-parcours')">📝 Examen Mi-parcours</button>
+
+                <li id="lecon-4" class="lecon-item bloque" onclick="cliquerLecon(4, 'https://vjs.zencdn.net/v/oceans.mp4', 'Module 4 : Effets Spéciaux et Étalonnage', 'Sublimez vos images.')">
+                    <span class="lecon-text">4. Effets et Étalonnage</span>
+                    <span class="statut-icon" id="icon-4">🔒</span>
+                </li>
+                
+                <li id="lecon-5" class="lecon-item bloque" onclick="cliquerLecon(5, 'https://www.w3schools.com/html/mov_bbb.mp4', 'Module 5 : Exportation et formats finaux', 'Apprenez à exporter votre projet.')">
+                    <span class="lecon-text">5. Exportation finale</span>
+                    <span class="statut-icon" id="icon-5">🔒</span>
+                </li>
+
+                <button id="exam-final" class="btn-sidebar-examen" style="background:#1b4d3e;" disabled onclick="lancerExamen('Final')">🎓 Examen Final & Certificat</button>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let leconActuelle = 1;
+        let leconsTerminees = [false, false, false, false, false];
+        let player = document.getElementById('main-player');
+        let quizBox = document.getElementById('quiz-box');
+        let currentQuizType = "";
+
+        window.onload = function() {
+            let doneSove = localStorage.getItem('elevation_progress_montage');
+            if (doneSove) {
+                leconsTerminees = JSON.parse(doneSove);
+                for (let i = 1; i <= 5; i++) {
+                    if (leconsTerminees[i-1]) {
+                        document.getElementById('icon-' + i).innerText = "✅";
+                        let pwochen = i + 1;
+                        if(pwochen <= 5) {
+                            document.getElementById('lecon-' + pwochen).classList.remove('bloque');
+                            document.getElementById('lecon-' + pwochen).classList.add('disponible');
+                            if(document.getElementById('icon-' + pwochen).innerText === "🔒") {
+                                document.getElementById('icon-' + pwochen).innerText = "▶️";
+                            }
+                        }
+                    }
+                }
+                if(leconsTerminees[2]) document.getElementById('exam-mi').disabled = false;
+                if(leconsTerminees[4]) document.getElementById('exam-final').disabled = false;
+                MajProgression();
+            }
+        };
+
+        function soveNanBrowser() {
+            localStorage.setItem('elevation_progress_montage', JSON.stringify(leconsTerminees));
+        }
+
+        function videoFini() {
+            leconsTerminees[leconActuelle - 1] = true;
+            document.getElementById('icon-' + leconActuelle).innerText = "✅";
+            soveNanBrowser();
+            
+            let prochaineLecon = leconActuelle + 1;
+            
+            if (prochaineLecon <= 5) {
+                let el = document.getElementById('lecon-' + prochaineLecon);
+                el.classList.remove('bloque');
+                el.classList.add('disponible');
+                if (document.getElementById('icon-' + prochaineLecon).innerText === "🔒") {
+                    document.getElementById('icon-' + prochaineLecon).innerText = "▶️";
+                }
+            }
+
+            if(leconsTerminees[2]) document.getElementById('exam-mi').disabled = false;
+            if(leconsTerminees[4]) document.getElementById('exam-final').disabled = false;
+
+            MajProgression();
+            alert("Félicitations ! Leçon validée.");
+        }
+
+        function cliquerLecon(num, lienVideo, titre, description) {
+            let el = document.getElementById('lecon-' + num);
+            if (el.classList.contains('bloque')) {
+                alert("🔒 Cette leçon est verrouillée.");
+                return;
+            }
+
+            player.style.display = "block";
+            quizBox.style.display = "none";
+
+            leconActuelle = num;
+            document.getElementById('video-title').innerText = titre;
+            document.getElementById('video-text').innerText = description;
+            player.src = lienVideo;
+            player.play(); 
+
+            let items = document.querySelectorAll('.lecon-item');
+            items.forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function MajProgression() {
+            let konte = leconsTerminees.filter(Boolean).length;
+            let pouksantaj = Math.round((konte / 5) * 100);
+            document.getElementById('prog-bar').style.width = pouksantaj + '%';
+            document.getElementById('prog-text').innerText = pouksantaj + '%';
+        }
+
+        function lancerExamen(type) {
+            currentQuizType = type;
+            player.style.display = "none"; 
+            quizBox.style.display = "block"; 
+            
+            document.getElementById('quiz-title').innerText = "📝 Examen " + type;
+            
+            let htmlQuiz = "";
+            if(type === 'Mi-parcours') {
+                htmlQuiz = `
+                    <div class="quiz-question">
+                        <p>1. Quel outil utilise-t-on pour couper une vidéo ?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1" value="A"> A) Texte</label>
+                            <label><input type="radio" name="q1" value="B"> B) Cutter (Rasoir)</label>
+                        </div>
+                    </div>
+                `;
+            } else {
+                htmlQuiz = `
+                    <div class="quiz-question">
+                        <p>1. Quel format d'exportation est idéal pour le Web ?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2" value="A"> A) AVI</label>
+                            <label><input type="radio" name="q2" value="B"> B) MP4 (H.264)</label>
+                        </div>
+                    </div>
+                `;
+            }
+            document.getElementById('quiz-content').innerHTML = htmlQuiz;
+        }
+
+        function verifierQuiz() {
+            if(currentQuizType === 'Mi-parcours') {
+                let reponse = document.querySelector('input[name="q1"]:checked');
+                if(!reponse) return;
+                if(reponse.value === "B") {
+                    alert("Bravo ! Examen réussi.");
+                } else { alert("Faux !"); return; }
+            } else {
+                let reponse = document.querySelector('input[name="q2"]:checked');
+                if(!reponse) return;
+                if(reponse.value === "B") {
+                    alert("🎓 Félicitations ! Formation complétée !");
+                } else { alert("Faux !"); return; }
+            }
+            quizBox.style.display = "none";
+            player.style.display = "block";
+        }
+
+        function reinitialiserTout() {
+            localStorage.removeItem('elevation_progress_montage');
+            location.reload();
+        }
+    </script>
+</body>
+</html>

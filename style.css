@@ -1,0 +1,159 @@
+/* Stil jeneral pou sit la */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* 1. Menu anwo a */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1b4d3e; /* Yon bèl koulè vèt fonse pwofesyonèl */
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.btn-inscription {
+    background-color: #1b4d3e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* 2. Gwo blòk Bienvenue a */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-principal {
+    display: inline-block;
+    background-color: #ff9f43; /* Yon bèl koulè oranj pou atire atansyon */
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* 3. Stil pou seksyon Kou yo */
+.section-cours {
+    padding: 60px 7%;
+    text-align: center;
+}
+
+.section-cours h2 {
+    font-size: 32px;
+    color: #1b4d3e;
+    margin-bottom: 10px;
+}
+
+.sous-titre {
+    color: #777;
+    margin-bottom: 40px;
+}
+
+/* Grille ki kenbe foto kou yo */
+.grille-cours {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Kat chak kou yo */
+.carte-cours {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.carte-cours:hover {
+    transform: translateY(-5px); /* Kat la ap monte tipatout lè w pase sourit sou li */
+}
+
+.carte-cours img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cours-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.cours-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #1b4d3e;
+}
+
+.cours-info p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+/* Bouton Voir le cours */
+.btn-cours {
+    width: 100%;
+    background-color: #1b4d3e;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-cours:hover {
+    background-color: #123329;
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevation Académie - Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f4f7f6; color: #333; }
+
+        /* HEADER DESIGN */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo-container img { height: 50px; display: block; object-fit: contain; }
+        .user-welcome { font-weight: bold; color: #1b4d3e; }
+
+        /* HERO BANNER ANKOURAJMAN */
+        .main-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .hero-banner { background: #1b4d3e; color: white; padding: 40px; border-radius: 12px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .hero-banner h1 { font-size: 32px; color: #ff9f43; margin-bottom: 15px; }
+        .hero-banner p { font-size: 16px; line-height: 1.6; opacity: 0.9; margin-bottom: 20px; }
+        .hero-banner strong { color: #ffffff; }
+        .badge-focus { display: inline-block; background: #ff9f43; color: white; padding: 6px 15px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+
+        /* GRILLE COURS */
+        .section-title { font-size: 22px; color: #1b4d3e; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .grille-cours { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        /* Tout kat fòmasyon yo kache pa defo */
+        .carte-cours { display: none; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; flex-direction: column; justify-content: space-between; }
+        .icon-box { height: 180px; display: flex; justify-content: center; align-items: center; font-size: 50px; }
+        
+        /* Background Koulè pou Bwat Ikon yo */
+        .bg-info { background: #e0f2fe; }
+        .bg-montage { background: #d1fae5; }
+        .bg-streaming { background: #f1f5f9; }
+        .bg-marketing { background: #dbeafe; }
+        .bg-entrepreneuriat { background: #fef3c7; }
+        .bg-retouche { background: #fae8ff; }
+
+        .cours-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .cours-info h3 { font-size: 20px; color: #1b4d3e; margin-bottom: 20px; text-align: center; }
+        
+        /* BOUTON VÈT AKTIF LA KI TOU GEN LYEN AN */
+        .btn-action { display: block; text-align: center; padding: 14px; border-radius: 6px; font-weight: bold; font-size: 16px; text-decoration: none; border: none; width: 100%; cursor: pointer; transition: 0.2s; background: #1b4d3e; color: white; }
+        .btn-action:hover { background: #13382d; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="file:///C:/Users/PC/Pictures/logo%20png.png" alt="Elevation Académie">
+        </div>
+        <div class="user-welcome" id="nav-user">Étudiant</div>
+    </header>
+
+    <div class="main-container">
+        <section class="hero-banner">
+            <h1 id="welcome-title">Bienvenue, Étudiant !</h1>
+            <p>Chaque grande compétence commence par un premier pas. Suivez vos cours avec <strong>patience</strong>, <strong>détermination</strong> et régularité. Prenez le temps de bien pratiquer chaque exercice. Le succès est au bout de l'effort !</p>
+            <div class="badge-focus">✨ Focus & Discipline</div>
+        </section>
+
+        <h2 class="section-title">📚 Votre Formation Activée</h2>
+        <div class="grille-cours">
+            
+            <div id="box-informatique" class="carte-cours">
+                <div class="icon-box bg-info">💻</div>
+                <div class="cours-info">
+                    <h3>Informatique Bureautique</h3>
+                    <a href="#" class="btn-action">Accéder au cours</a>
+                </div>
+            </div>
+
+            <div id="box-montage" class="carte-cours">
+                <div class="icon-box bg-montage">🎬</div>
+                <div class="cours-info">
+                    <h3>Montage Vidéo Professionnel</h3>
+                    <a href="montage-video.html" class="btn-action">Accéder au cours</a>
+                </div>
+            </div>
+
+            <div id="box-streaming" class="carte-cours">
+                <div class="icon-box bg-streaming">📡</div>
+                <div class="cours-info">
+                    <h3>Live Streaming Pro</h3>
+                    <a href="#" class="btn-action">Accéder au cours</a>
+                </div>
+            </div>
+
+            <div id="box-marketing" class="carte-cours">
+                <div class="icon-box bg-marketing">🚀</div>
+                <div class="cours-info">
+                    <h3>Marketing Digital</h3>
+                    <a href="#" class="btn-action">Accéder au cours</a>
+                </div>
+            </div>
+
+            <div id="box-entrepreneuriat" class="carte-cours">
+                <div class="icon-box bg-entrepreneuriat">💼</div>
+                <div class="cours-info">
+                    <h3>Entrepreneuriat</h3>
+                    <a href="#" class="btn-action">Accéder au cours</a>
+                </div>
+            </div>
+
+            <div id="box-retouche" class="carte-cours">
+                <div class="icon-box bg-retouche">📸</div>
+                <div class="cours-info">
+                    <h3>Retouche Photo Pro</h3>
+                    <a href="#" class="btn-action">Accéder au cours</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Dinamikman mete non elèv la nan sistèm nan
+            let nomEtudiant = localStorage.getItem('elevation_user_name') || "Étudiant";
+            document.getElementById('welcome-title').innerText = "Bienvenue, " + nomEtudiant + " !";
+            document.getElementById('nav-user').innerText = nomEtudiant;
+
+            // Tcheke kilès nan kou yo elèv la te klike sou paj akèy la (index.html)
+            let coursChoisi = localStorage.getItem('cours_choisi');
+
+            if (coursChoisi) {
+                // Jwenn ID kat egzak la (pa egzanp: box-montage)
+                let katPouAfiche = document.getElementById("box-" + coursChoisi);
+                
+                if (katPouAfiche) {
+                    // Nou fòse swlman kat sa a parèt epi lòt 5 yo ap rete kache nèt!
+                    katPouAfiche.style.display = "flex";
+                }
+            } else {
+                // Si pou yon rezon elèv la rive dirèkteman la, nou montre Montage Vidéo pa defo
+                let katDefo = document.getElementById("box-montage");
+                if (katDefo) katDefo.style.display = "flex";
+            }
+        });
+    </script>
+
+</body>
+</html>
